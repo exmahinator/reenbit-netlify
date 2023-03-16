@@ -1,6 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchCharacters, fetchCharacterById } from './characterOperations';
+import { fetchCharacters, fetchCharacterById } from "./characterOperations";
 
 const initialState = {
   characters: {
@@ -14,11 +14,12 @@ const initialState = {
     isLoading: false,
     error: null,
   },
-  filterName: '',
+  filterName: "",
+  searchValue: "",
   page: 1,
 };
 
-const handlePending = state => {
+const handlePending = (state) => {
   state.characters.error = null;
   state.characters.isLoading = true;
 };
@@ -28,7 +29,7 @@ const handleRejected = (state, action) => {
   state.characters.error = action.payload;
 };
 
-const handlePendingSingle = state => {
+const handlePendingSingle = (state) => {
   state.character.isLoading = true;
   state.character.error = null;
 };
@@ -39,8 +40,13 @@ const handleRejectedSingle = (state, action) => {
 };
 
 const sliceCharacters = createSlice({
-  name: 'root',
+  name: "root",
   initialState,
+  reducers: {
+    saveSearchValue(state, { payload }) {
+      state.searchValue = payload;
+    },
+  },
   extraReducers: {
     [fetchCharacters.pending]: handlePending,
     [fetchCharacters.fulfilled](state, action) {
@@ -69,4 +75,5 @@ const sliceCharacters = createSlice({
   },
 });
 
+export const { saveSearchValue } = sliceCharacters.actions;
 export const charactersReducer = sliceCharacters.reducer;

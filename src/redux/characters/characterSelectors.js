@@ -1,7 +1,7 @@
-import { createSelector } from '@reduxjs/toolkit';
+import { createSelector } from "@reduxjs/toolkit";
 
 // ==============================================================
-export const rootSelector = state => state.root;
+export const rootSelector = (state) => state.root;
 // ==============================================================
 
 // ---------------------------------------------------------------
@@ -23,6 +23,11 @@ export const currentPageSelector = createSelector(
 export const filterNameSelector = createSelector(
   rootSelector,
   ({ filterName }) => filterName
+);
+
+export const searchValueSelector = createSelector(
+  rootSelector,
+  ({ searchValue }) => searchValue
 );
 // -----------------------------------------------------------------
 
