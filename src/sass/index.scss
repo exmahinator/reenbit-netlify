@@ -1,0 +1,8 @@
+@import-normalize;
+@import "./utils/resetAllStyles";
+
+@import "./variables/variables";
+@import "./basicStyles/basicStyles";
+@import "./pageStyles/homePage";
+@import "./pageStyles/detailsPage";
+@import "./pageStyles/errorPage";
