@@ -1,23 +1,21 @@
-import React, { useEffect, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchCharacters } from '../redux/characters/characterOperations';
+import React, { useEffect, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchCharacters } from "../redux/characters/characterOperations";
 
-// import {
-//   selectCharacters,
-//   selectCharactersLoading,
-//   selectCharactersError,
-//   currentPageSelector,
-//   filterNameSelector,
-//   currentFetchInfo
-// } from '../redux/characters/characterSelectors';
+import {
+  selectCharacters,
+  selectCharactersError,
+  selectCharactersLoading,
+  currentPageSelector,
+  filterNameSelector,
+  currentFetchInfo,
+} from "../redux/characters/characterSelectors";
 
-import { selectCharacters, selectCharactersError, selectCharactersLoading, currentPageSelector, filterNameSelector, currentFetchInfo } from '../redux/characters/characterSelectors';
+import debounce from "lodash.debounce";
 
-import debounce from 'lodash.debounce';
-
-import { ThreeCircles } from 'react-loader-spinner';
-import ListOfCharacters from './ListOfCharacters';
-import ScrollBtn from './ScrollBtn';
+import { ThreeCircles } from "react-loader-spinner";
+import ListOfCharacters from "./ListOfCharacters";
+import ScrollBtn from "./ScrollBtn";
 
 function HomeList() {
   const dispatch = useDispatch();
@@ -29,7 +27,7 @@ function HomeList() {
   const error = useSelector(selectCharactersError);
   const currentPage = useSelector(currentPageSelector);
   const filterName = useSelector(filterNameSelector);
-  const currentInfo = useSelector(currentFetchInfo)
+  const currentInfo = useSelector(currentFetchInfo);
 
   nameRef.current = filterName;
 
@@ -53,14 +51,14 @@ function HomeList() {
 
   useEffect(() => {
     if (callbackRef.current)
-      window.removeEventListener('scroll', callbackRef.current);
+      window.removeEventListener("scroll", callbackRef.current);
 
     callbackRef.current = debounce(handleScroll, 300);
 
-    window.addEventListener('scroll', callbackRef.current);
+    window.addEventListener("scroll", callbackRef.current);
 
     return () => {
-      window.removeEventListener('scroll', callbackRef.current);
+      window.removeEventListener("scroll", callbackRef.current);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, filterName, currentInfo]);
@@ -68,7 +66,7 @@ function HomeList() {
   return (
     <>
       <ScrollBtn
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         additionalClass="scrollBtn__container--top"
       >
         To top
@@ -106,7 +104,7 @@ function HomeList() {
         onClick={() =>
           window.scrollTo({
             top: document.body.scrollHeight,
-            behavior: 'smooth',
+            behavior: "smooth",
           })
         }
         additionalClass="scrollBtn__container--bottom"

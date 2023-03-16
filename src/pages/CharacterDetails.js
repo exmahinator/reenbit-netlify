@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import { useParams, NavLink } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchCharacterById } from 'redux/characters/characterOperations';
 
-import { selectSingleCharacter, selectSingleCharacterLoading, selectSingleCharacterError } from '..redux/characters/characterSelectors';
+import { fetchCharacterById } from '../redux/characters/characterOperations';
+
+import { selectSingleCharacter, selectSingleCharacterError, selectSingleCharacterLoading } from '../redux/characters/characterSelectors';
 
 import { ThreeCircles } from 'react-loader-spinner';
 

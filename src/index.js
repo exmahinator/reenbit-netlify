@@ -12,7 +12,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter basename="/reenbit-test-task">
+        <BrowserRouter basename="/">
           <App />
         </BrowserRouter>
       </PersistGate>
