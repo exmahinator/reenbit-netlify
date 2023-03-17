@@ -1,15 +1,13 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCharacters } from '../redux/characters/characterOperations';
 import debounce from 'lodash.debounce';
-import { searchValueSelector } from '../redux/characters/characterSelectors';
+import { filterNameSelector } from '../redux/characters/characterSelectors';
 
 function SearchBar() {
   const dispatch = useDispatch();
 
-  // const currentSearchValue = useSelector(searchValueSelector);
-
-  // const [searchValue, setSearchValue] = useState(useSelector(searchValueSelector));
+  const filterName = useSelector(filterNameSelector)
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const searchByName = useCallback(
@@ -17,13 +15,7 @@ function SearchBar() {
       dispatch(fetchCharacters({ page: 1, name: event.target.value.trim().toLowerCase() }));
     }, 1000)
   , []);
-
-  // useEffect(() => {
-  //   searchByName()
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [])
   
-
   return (
     <div className="filter__container">
       <div className="filter__subContainer">
@@ -34,7 +26,7 @@ function SearchBar() {
           name="filterCharacter"
           placeholder="Filter by name..."
           className="filter__input"
-          // value={currentSearchValue}
+          defaultValue={filterName}
           onChange={searchByName}
         />
       </div>

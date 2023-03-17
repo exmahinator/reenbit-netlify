@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react';
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { selectCharacters } from '../redux/characters/characterSelectors';
+import React, { useMemo, useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectCharacters } from "../redux/characters/characterSelectors";
 
 function ListOfCharacters() {
   const getCharacters = useSelector(selectCharacters);
@@ -14,6 +14,17 @@ function ListOfCharacters() {
     [getCharacters]
   );
 
+  useEffect(() => {
+    if (sortedInAlphabeticalOrder.length) {
+      const scrollPosition = sessionStorage.getItem("scrollPosition");
+      if (scrollPosition) {
+        window.scrollTo(0, parseInt(scrollPosition, 10));
+        sessionStorage.removeItem("scrollPosition");
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sortedInAlphabeticalOrder]);
+
   return (
     <div className="character__container">
       <h1 className="visually-hidden">List of heroes</h1>
@@ -21,7 +32,12 @@ function ListOfCharacters() {
         {sortedInAlphabeticalOrder.map(({ id, name, species, image }) => {
           return (
             <li className="character__item" key={id}>
-              <NavLink to={`details/${id}`}>
+              <NavLink
+                to={`details/${id}`}
+                onClick={() => {
+                  sessionStorage.setItem("scrollPosition", window.pageYOffset);
+                }}
+              >
                 <div className="character__itemContainer">
                   <img
                     loading="lazy"

@@ -15,7 +15,7 @@ import { charactersReducer } from './characters/characterSlice';
 const charactersPersistConfig = {
   key: 'root',
   storage,
-  whitelist: ['characters', 'character', 'filterName', 'page', "searchValue"],
+  whitelist: ['characters', 'character', 'filterName', 'page'],
 };
 
 export const store = configureStore({

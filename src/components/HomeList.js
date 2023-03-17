@@ -20,7 +20,6 @@ import ScrollBtn from "./ScrollBtn";
 function HomeList() {
   const dispatch = useDispatch();
   const callbackRef = useRef();
-  const nameRef = useRef();
 
   const characters = useSelector(selectCharacters);
   const isLoading = useSelector(selectCharactersLoading);
@@ -28,8 +27,6 @@ function HomeList() {
   const currentPage = useSelector(currentPageSelector);
   const filterName = useSelector(filterNameSelector);
   const currentInfo = useSelector(currentFetchInfo);
-
-  nameRef.current = filterName;
 
   const listLength = characters.length;
 

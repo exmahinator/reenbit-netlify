@@ -24,11 +24,6 @@ export const filterNameSelector = createSelector(
   rootSelector,
   ({ filterName }) => filterName
 );
-
-export const searchValueSelector = createSelector(
-  rootSelector,
-  ({ searchValue }) => searchValue
-);
 // -----------------------------------------------------------------
 
 export const currentFetchInfo = createSelector(

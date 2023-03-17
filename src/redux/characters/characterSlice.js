@@ -15,7 +15,6 @@ const initialState = {
     error: null,
   },
   filterName: "",
-  searchValue: "",
   page: 1,
 };
 
@@ -42,11 +41,6 @@ const handleRejectedSingle = (state, action) => {
 const sliceCharacters = createSlice({
   name: "root",
   initialState,
-  reducers: {
-    saveSearchValue(state, { payload }) {
-      state.searchValue = payload;
-    },
-  },
   extraReducers: {
     [fetchCharacters.pending]: handlePending,
     [fetchCharacters.fulfilled](state, action) {
@@ -74,6 +68,4 @@ const sliceCharacters = createSlice({
     [fetchCharacterById.rejected]: handleRejectedSingle,
   },
 });
-
-export const { saveSearchValue } = sliceCharacters.actions;
 export const charactersReducer = sliceCharacters.reducer;
